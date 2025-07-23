@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتيجة الثانوية العامة</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <nav class="nav-links">
+                <a href="#" class="active">الرئيسية</a>
+            </nav>
+            <div class="logo-container">
+                <img src="./img/logo.jpg" alt="شعار جمهورية مصر العربية" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="search-section" class="search-section">
+            <h2 class="section-title">الآن .. نتيجة الثانوية العامة</h2>
+            <div class="search-form">
+                <div class="input-group">
+                    <label for="seat-number">رقم الجلوس</label>
+                    <input type="text" id="seat-number" placeholder="ادخل رقم الجلوس">
+                </div>
+                <div class="input-group">
+                    <label for="system-select">نظام</label>
+                    <select id="system-select">
+                        <option value="modern">نظام حديث</option>
+                        <option value="old">نظام قديم</option>
+                    </select>
+                </div>
+                <button id="show-result-btn" class="submit-button">عرض النتيجة <i class="fas fa-chevron-down"></i></button>
+            </div>
+            <div class="banner">
+                <div class="banner-content">
+                    <h3>وزارة التربية والتعليم</h3>
+                    <p>ترحب بكم، وتتمنى لأبنائها وبناتها طلاب وطالبات الشهادة الثانوية النجاح والتوفيق</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="result-section" class="result-section hidden">
+            <h2 class="section-title success">ناجح</h2>
+            <div class="result-grid">
+                <div class="student-info-card">
+                    <div class="card-header">
+                        <i class="fas fa-user-circle"></i>
+                        <span>البيانات الشخصية</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-item">
+                            <span>رقم الجلوس:</span>
+                            <span id="display-seat-number"></span>
+                        </div>
+                        <div class="info-item">
+                            <span>الإسم:</span>
+                            <span id="display-student-name"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="student-grades-card">
+                    <div class="card-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>نتيجة الطالب</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="grade-item">
+                            <span>اللغة العربية</span>
+                            <span id="grade-arabic"></span>
+                        </div>
+                        <div class="grade-item">
+                            <span>اللغة الأجنبية الأولى</span>
+                            <span id="grade-foreign1"></span>
+                        </div>
+                        <div class="grade-item">
+                            <span>التاريخ</span>
+                            <span id="grade-history"></span>
+                        </div>
+                        <div class="grade-item">
+                            <span>الجغرافيا</span>
+                            <span id="grade-geography"></span>
+                        </div>
+                        <div class="grade-item">
+                            <span>الإحصاء</span>
+                            <span id="grade-statistics"></span>
+                        </div>
+                        <div class="grade-item total-grade">
+                            <span>المجموع الكلي</span>
+                            <span id="grade-total"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="additional-subjects-card">
+                    <div class="card-header">
+                        <i class="fas fa-book"></i>
+                        <span>المواد التي لاتضاف للمجموع</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="grade-item">
+                            <span>التربية الدينية</span>
+                            <span id="grade-religious"></span>
+                        </div>
+                        <div class="grade-item">
+                            <span>التربية الوطنية</span>
+                            <span id="grade-national"></span>
+                        </div>
+                        <div class="grade-item">
+                            <span>اللغة الأجنبية الثانية</span>
+                            <span id="grade-foreign2"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
