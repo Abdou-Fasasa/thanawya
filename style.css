@@ -318,3 +318,14 @@ body {
         flex-wrap: wrap;
     }
 }
+.error-message {
+    color: var(--danger-color); /* أحمر */
+    font-weight: 600;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.error-message.hidden {
+    display: none;
+}

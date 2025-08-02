@@ -4,37 +4,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const showResultBtn = document.getElementById('show-result-btn');
     const searchSection = document.getElementById('search-section');
     const resultSection = document.getElementById('result-section');
+    const errorMessage = document.getElementById('error-message');
 
     const displaySeatNumber = document.getElementById('display-seat-number');
     const displayStudentName = document.getElementById('display-student-name');
+    
+    // عناصر عرض الدرجات للمواد العلمية
     const gradeArabic = document.getElementById('grade-arabic');
     const gradeForeign1 = document.getElementById('grade-foreign1');
-    const gradeHistory = document.getElementById('grade-history');
-    const gradeGeography = document.getElementById('grade-geography');
-    const gradeStatistics = document.getElementById('grade-statistics');
-    const gradeTotal = document.getElementById('grade-total');
+    const gradeChemistry = document.getElementById('grade-chemistry');
+    const gradeBiology = document.getElementById('grade-biology');
+    const gradePhysics = document.getElementById('grade-physics');
+    
+    // عناصر عرض الدرجات للمواد التي لا تضاف للمجموع
     const gradeReligious = document.getElementById('grade-religious');
     const gradeNational = document.getElementById('grade-national');
     const gradeForeign2 = document.getElementById('grade-foreign2');
+    
+    const gradeTotal = document.getElementById('grade-total');
 
     // Dummy data for students
     const studentsData = {
-        '1327336': {
-            name: 'منه الله زكريا فاروق محمود محمد',
+        '1093742': {
+            name: 'تقوى عبدالعظيم عبدالفتاح عبداللطيف',
             system: 'modern',
             grades: {
-                // Adjusting main subject grades so their total equals 192 (60% of 320)
-                // Arabic (out of 80), others (out of 60)
-                arabic: 55,    // Example: 55/80
-                foreign1: 35, // Example: 35/60
-                history: 35,   // Example: 35/60
-                geography: 35, // Example: 35/60
-                statistics: 32, // Example: 32/60
-                               // Sum: 55 + 35 + 35 + 35 + 32 = 192 (Exactly 60%)
+                // المواد التي تضاف للمجموع الكلي
+                arabic: 72,
+                foreign1: 55,
+                chemistry: 45,
+                biology: 42,
+                physics: 42,
 
-                // Non-added subjects - kept as in the provided image (13, 13, 13)
-                religious: 13,
-                national: 13,
+                // المواد التي لا تضاف للمجموع الكلي
+                religious: 21,
+                national: 14,
                 foreign2: 13
             }
         },
@@ -43,29 +47,37 @@ document.addEventListener('DOMContentLoaded', () => {
     showResultBtn.addEventListener('click', () => {
         const seatNumber = seatNumberInput.value.trim();
         const selectedSystem = systemSelect.value;
+        
+        // إخفاء رسالة الخطأ قبل البحث الجديد
+        errorMessage.classList.add('hidden');
 
         if (seatNumber === '') {
-            alert('الرجاء إدخال رقم الجلوس.');
+            errorMessage.textContent = 'الرجاء إدخال رقم الجلوس.';
+            errorMessage.classList.remove('hidden');
             return;
         }
 
         const student = studentsData[seatNumber];
 
         if (student && student.system === selectedSystem) {
-            // Calculate total grade for main subjects
+            // حساب المجموع الكلي للمواد الرئيسية فقط
             const mainSubjectsTotal = student.grades.arabic + student.grades.foreign1 +
-                                      student.grades.history + student.grades.geography +
-                                      student.grades.statistics;
+                                     student.grades.chemistry + student.grades.biology +
+                                     student.grades.physics;
 
             displaySeatNumber.textContent = seatNumber;
             displayStudentName.textContent = student.name;
+            
+            // عرض درجات المواد العلمية
             gradeArabic.textContent = student.grades.arabic;
-            gradeForeign1.textContent = student.grades.foreign1;
-            gradeHistory.textContent = student.grades.history;
-            gradeGeography.textContent = student.grades.geography;
-            gradeStatistics.textContent = student.grades.statistics;
-            gradeTotal.textContent = mainSubjectsTotal; // Display calculated total
+            gradeForeign1.textContent = student.grades.foreign1; 
+            gradeChemistry.textContent = student.grades.chemistry;
+            gradeBiology.textContent = student.grades.biology;
+            gradePhysics.textContent = student.grades.physics;
+            
+            gradeTotal.textContent = mainSubjectsTotal; // عرض المجموع الكلي
 
+            // عرض درجات المواد التي لا تضاف للمجموع
             gradeReligious.textContent = student.grades.religious;
             gradeNational.textContent = student.grades.national;
             gradeForeign2.textContent = student.grades.foreign2;
@@ -73,13 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
             searchSection.classList.add('hidden');
             resultSection.classList.remove('hidden');
         } else {
-            alert('عذراً، لم يتم العثور على نتيجة لهذا الرقم أو النظام.');
-            // Optionally, clear previous results if any
+            errorMessage.textContent = 'رقم الجلوس او اسم الطالب غير صحيح.';
+            errorMessage.classList.remove('hidden');
             resultSection.classList.add('hidden');
             searchSection.classList.remove('hidden');
         }
     });
-
-    // Optional: Back button or link to return to search (not explicitly in your screenshots, but good UX)
-    // You could add a button in result-section and handle its click event to show searchSection again.
 });
